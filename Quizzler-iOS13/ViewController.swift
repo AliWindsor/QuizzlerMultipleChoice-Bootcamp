@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        questionLabel.text = "True or False?"
+        questionLabel.text = quiz[0]
     }
     @IBAction func responseButton(_ sender: UIButton) {
     }
