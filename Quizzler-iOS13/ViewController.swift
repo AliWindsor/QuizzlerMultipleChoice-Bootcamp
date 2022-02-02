@@ -9,12 +9,24 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var trueButton: UIButton!
+    @IBOutlet weak var falseButton: UIButton!
     
+    let quiz = ["Q1",
+                "Q2",
+                "Q3",
+    ]
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        questionLabel.text = "True or False?"
     }
-
+    @IBAction func responseButton(_ sender: UIButton) {
+    }
+    
 
 }
 
