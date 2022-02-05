@@ -35,6 +35,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         updateUI()
+        
     }
     
     @IBAction func responseButton(_ sender: UIButton) {
@@ -44,22 +45,37 @@ class ViewController: UIViewController {
         let correctAns = quiz[questionNum].answer
         
         if userAns == correctAns{
+            sender.backgroundColor = UIColor.green
             print("Correct")
         }else{
             print("Wrong")
+            sender.backgroundColor = UIColor.red
         }
   
         if questionNum < quiz.count - 1{
             questionNum += 1
+            //updateUI()
         }else{
             questionNum = 0
+            //updateUI()
         }
         
-        updateUI()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.updateUI()
+        }
+        /* OR use a timer. Using GCD as above seems to be mroe favoured as its more optimized. 
+         
+         let timer = Timer.scheduledTimer(time.Interval: 0.5. target: self, selector: #selector(updateUI), userInfo:nil, repeats: false)
+         
+         */
+        
     }
     
     func updateUI (){
         questionLabel.text = quiz[questionNum].text
+        trueButton.backgroundColor = UIColor.clear
+        falseButton.backgroundColor = UIColor.clear
+        print("Called")
     }
     
 
