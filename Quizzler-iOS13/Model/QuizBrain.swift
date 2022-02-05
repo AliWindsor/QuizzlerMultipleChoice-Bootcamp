@@ -1,19 +1,14 @@
 //
-//  ViewController.swift
+//  QuizBrain.swift
 //  Quizzler-iOS13
 //
-//  Created by Angela Yu on 12/07/2019.
-//  Copyright © 2019 The App Brewery. All rights reserved.
+//  Created by Alicia Windsor on 05/02/2022.
+//  Copyright © 2022 The App Brewery. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class ViewController: UIViewController {
-    @IBOutlet weak var questionLabel: UILabel!
-    @IBOutlet weak var progressBar: UIProgressView!
-    @IBOutlet weak var trueButton: UIButton!
-    @IBOutlet weak var falseButton: UIButton!
-    
+struct QuizBrain {
     let quiz = [
           Question(q: "A slug's blood is green.", a: "True"),
                 Question(q: "Approximately one quarter of human bones are in the feet.", a: "True"),
@@ -31,25 +26,22 @@ class ViewController: UIViewController {
     
     var questionNum = 0
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        updateUI()
+    //user ans logic
+    func checkAnswer (_ ans : String) -> Bool{
+  
+        if ans == quiz[questionNum].answer{
+            //sender.backgroundColor = UIColor.green
+            return true
+        }else{
+            //sender.backgroundColor = UIColor.red
+            return false
+        }
         
     }
     
-    @IBAction func responseButton(_ sender: UIButton) {
+    //give next question
+    mutating func getNextQuestion () -> String{
         
-        let userAns = sender.currentTitle!
-
-        let correctAns = quiz[questionNum].answer
-        
-        if userAns == correctAns{
-            sender.backgroundColor = UIColor.green
-        }else{
-            sender.backgroundColor = UIColor.red
-        }
-  
         if questionNum < quiz.count - 1{
             questionNum += 1
     
@@ -57,26 +49,12 @@ class ViewController: UIViewController {
             questionNum = 0
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            self.updateUI()
-        }
-        /* OR use a timer. Using GCD as above seems to be mroe favoured as its more optimized.
-         
-         Timer.scheduledTimer(time.Interval: 0.5. target: self, selector: #selector(updateUI), userInfo:nil, repeats: false)
-         
-         add @obj c to updateUI func
-         */
-        
+        return quiz[questionNum].text
     }
     
-    func updateUI (){
-        questionLabel.text = quiz[questionNum].text
-        trueButton.backgroundColor = UIColor.clear
-        falseButton.backgroundColor = UIColor.clear
+    //calc user progress
+    func getProgress() -> Float{
+        return Float(questionNum + 1)/Float(quiz.count)
         
-        progressBar.progress = Float(questionNum + 1)/Float(quiz.count)
     }
-    
-
 }
-
