@@ -11,17 +11,20 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
-    @IBOutlet weak var trueButton: UIButton!
-    @IBOutlet weak var falseButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
+    
+    @IBOutlet weak var choiceOne: UIButton!
+    @IBOutlet weak var choiceTwo: UIButton!
+    @IBOutlet weak var choiceThree: UIButton!
+    
     
     var quizBrain = QuizBrain()
   
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        quizBrain.viewOnLoad()
         updateUI()
-        
     }
     
     @IBAction func responseButton(_ sender: UIButton) {
@@ -37,9 +40,6 @@ class ViewController: UIViewController {
             sender.backgroundColor = UIColor.red
         }
         
-        
-       
- 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.updateUI()
         }
@@ -58,12 +58,16 @@ class ViewController: UIViewController {
         questionLabel.text = quizBrain.getNextQuestion()
         scoreLabel.text = "Score: \(quizBrain.getScore())"
         
-        trueButton.backgroundColor = UIColor.clear
-        falseButton.backgroundColor = UIColor.clear
+        choiceOne.setTitle(quizBrain.getAnswerChoices()[0], for: .normal)
+        choiceTwo.setTitle(quizBrain.getAnswerChoices()[1], for: .normal)
+        choiceThree.setTitle(quizBrain.getAnswerChoices()[2], for: .normal)
         
+        choiceOne.backgroundColor = UIColor.clear
+        choiceTwo.backgroundColor = UIColor.clear
+        choiceThree.backgroundColor = UIColor.clear
+
         progressBar.progress = quizBrain.getProgress()
     }
-    
 
 }
 
