@@ -63,10 +63,11 @@ class ViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.updateUI()
         }
-        /* OR use a timer. Using GCD as above seems to be mroe favoured as its more optimized. 
+        /* OR use a timer. Using GCD as above seems to be mroe favoured as its more optimized.
          
-         let timer = Timer.scheduledTimer(time.Interval: 0.5. target: self, selector: #selector(updateUI), userInfo:nil, repeats: false)
+         Timer.scheduledTimer(time.Interval: 0.5. target: self, selector: #selector(updateUI), userInfo:nil, repeats: false)
          
+         add @obj c to updateUI func
          */
         
     }
