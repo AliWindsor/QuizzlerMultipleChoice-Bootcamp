@@ -46,21 +46,18 @@ class ViewController: UIViewController {
         
         if userAns == correctAns{
             sender.backgroundColor = UIColor.green
-            print("Correct")
         }else{
-            print("Wrong")
             sender.backgroundColor = UIColor.red
         }
   
         if questionNum < quiz.count - 1{
             questionNum += 1
-            //updateUI()
+    
         }else{
             questionNum = 0
-            //updateUI()
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.updateUI()
         }
         /* OR use a timer. Using GCD as above seems to be mroe favoured as its more optimized.
@@ -76,7 +73,8 @@ class ViewController: UIViewController {
         questionLabel.text = quiz[questionNum].text
         trueButton.backgroundColor = UIColor.clear
         falseButton.backgroundColor = UIColor.clear
-        print("Called")
+        
+        progressBar.progress = Float(questionNum)/Float(quiz.count)
     }
     
 
