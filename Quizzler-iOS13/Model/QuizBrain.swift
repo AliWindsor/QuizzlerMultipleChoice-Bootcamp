@@ -25,7 +25,6 @@ struct QuizBrain {
     
     var questionNum = 0
     var userScore = 0
-    var answerNum = 0
     
     //check user ans is correct and update score
     mutating func checkAnswer (_ ans : String) -> Bool{
@@ -45,12 +44,10 @@ struct QuizBrain {
         
         if questionNum < quiz.count - 1 {
             questionNum += 1
-            answerNum += 1
            
         }else{
             questionNum = 0
             userScore = 0
-            answerNum = 0
         }
 
         return quiz[questionNum].text
@@ -58,7 +55,7 @@ struct QuizBrain {
     
     mutating func getAnswerChoices() -> [String] {
        // print(quiz[questionNum].answer)
-        return quiz[answerNum].answer
+        return quiz[questionNum].answer
     }
     
     //calc user progress
@@ -75,6 +72,5 @@ struct QuizBrain {
     
     mutating func viewOnLoad () {
         questionNum = -1
-        answerNum = -1
     }
 }
